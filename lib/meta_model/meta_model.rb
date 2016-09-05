@@ -87,7 +87,7 @@ module MetaModel
     end
 
     def resource_lookup(value)
-      @index["#{value[:type]}_#{value[:id]}"] || MetaModel.new(value[:type], {data: value})
+      @index["#{value[:type]}_#{value[:id]}"] || MetaModel.new({data: value})
     end
   end
 end
