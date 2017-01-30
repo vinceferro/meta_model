@@ -21,8 +21,8 @@ module MetaModel
       end
     end
 
-
-    def associations(include_tree = DEFAULT_INCLUDE_TREE)
+    def associations(include_tree = DEFAULT_INCLUDE_TREE, include_slice = nil)
+      include_slice ||= include_tree
       return unless object
 
       Enumerator.new do |y|
@@ -30,7 +30,7 @@ module MetaModel
           next if reflection.excluded?(self)
           key = reflection.options.fetch(:key, reflection.name)
           next unless include_tree.key?(key)
-          y.yield reflection.build_association(self, instance_options)
+          y.yield reflection.build_association(self, instance_options, include_slice)
         end
       end
     end
